@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinguaFlow — Multilingual Translator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────────── -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <span class="logo-text">Lingua<span>Flow</span></span>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+      <span class="icon-moon">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </span>
+      <span class="icon-sun">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </span>
+    </button>
+  </header>
+
+  <!-- ── Main Card ───────────────────────────────────────────────── -->
+  <div class="card">
+
+    <!-- Language Bar -->
+    <div class="lang-bar">
+      <div class="lang-group">
+        <select id="sourceLang" title="Source language">
+          <option value="auto">Detect Language</option>
+          <option value="en" selected>English</option>
+          <option value="fr">French</option>
+          <option value="es">Spanish</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="pt">Portuguese</option>
+          <option value="nl">Dutch</option>
+          <option value="ru">Russian</option>
+          <option value="zh">Chinese</option>
+          <option value="ja">Japanese</option>
+          <option value="ar">Arabic</option>
+          <option value="ko">Korean</option>
+          <option value="pl">Polish</option>
+          <option value="sv">Swedish</option>
+          <option value="tr">Turkish</option>
+        </select>
+        <span class="detected-badge" id="detectedBadge">Detected</span>
+      </div>
+
+      <button class="switch-btn" id="switchBtn" title="Switch languages">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4"/>
+        </svg>
+      </button>
+
+      <div class="lang-group right">
+        <select id="targetLang" title="Target language">
+          <option value="fr" selected>French</option>
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="pt">Portuguese</option>
+          <option value="nl">Dutch</option>
+          <option value="ru">Russian</option>
+          <option value="zh">Chinese</option>
+          <option value="ja">Japanese</option>
+          <option value="ar">Arabic</option>
+          <option value="ko">Korean</option>
+          <option value="pl">Polish</option>
+          <option value="sv">Swedish</option>
+          <option value="tr">Turkish</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Translation Panels -->
+    <div class="panels">
+
+      <!-- Input Panel -->
+      <div class="panel" id="inputPanel">
+        <span class="panel-label">Input</span>
+        <textarea id="inputText"
+                  maxlength="500"
+                  placeholder="Type text to translate…"
+                  aria-label="Text to translate">Hello, how are you</textarea>
+        <div class="panel-footer">
+          <button class="icon-btn" id="listenInput" title="Listen to input" disabled>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+            Listen
+          </button>
+          <button class="icon-btn" id="copyInput" title="Copy input text" disabled>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            Copy
+          </button>
+          <span class="char-count" id="charCount">18/500</span>
+        </div>
+      </div>
+
+      <!-- Output Panel -->
+      <div class="panel" id="outputPanel">
+        <span class="panel-label">Output</span>
+        <div class="output-text" id="outputText" aria-live="polite">
+          Bonjour, comment allez-vous
+        </div>
+        <div class="panel-footer">
+          <button class="icon-btn" id="listenOutput" title="Listen to translation" disabled>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+            Listen
+          </button>
+          <button class="icon-btn" id="copyOutput" title="Copy translated text" disabled>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            Copy
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Banner -->
+    <div class="error-banner" id="errorBanner" role="alert">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <span id="errorMsg">Translation failed. Please try again.</span>
+    </div>
+
+    <!-- Translate Button -->
+    <div class="btn-row">
+      <button class="translate-btn" id="translateBtn">
+        <div class="spinner"></div>
+        <span class="btn-label">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          Translate
+        </span>
+      </button>
+    </div>
+
+  </div><!-- /.card -->
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
